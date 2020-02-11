@@ -136,11 +136,18 @@
 
 			 		if($order != ""){
 			 			$order->update_status( 'on-hold', __( 'Awaiting Payhalal Payment') );
+						
+						//****************
+						// 200211
+						// tested working by HDC
+						$order->payment_complete();
+						//****************
+						
 						$myuser_id = (int)$order->user_id;
-		    			$user_info = get_userdata($myuser_id);
+		    				$user_info = get_userdata($myuser_id);
 
-		    			unset($data_out);
-		    			$data_out["base_url"] = get_home_url().'/wc-api/payhalalcallback/';
+		    				unset($data_out);
+		    				$data_out["base_url"] = get_home_url().'/wc-api/payhalalcallback/';
 
 						$data_out["app_id"] = $this->publishable_key;
 						$data_out["amount"] = WC()->cart->total;
